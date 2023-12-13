@@ -1,0 +1,36 @@
+<div>
+  <nav class="flex items-center justify-between p-4 bg-gray-800 text-white">
+    <!-- Logo -->
+    <div class="hidden md:flex items-center">
+      <img src="assets/images/webshop-logo.gif" alt="Company Logo" class="w-8 h-8 mr-2">
+      <span class="text-lg font-bold">A very real shop</span>
+    </div>
+
+    <div class="md:flex items-center space-x-4">
+      <a routerLink="/home" class="nav-item" aria-current="page">Home</a>
+      <a routerLink="/shop" class="nav-item">Shop</a>
+      <a routerLink="/addproduct" class="nav-item" *ngIf="isAdmin">Add product</a>
+    </div>
+
+    <div class="flex items-center space-x-4">
+      <button class="nav-item" *ngIf="isLoggedIn"><a routerLink="/me">My account</a></button>
+      <button class="nav-item" *ngIf="!isLoggedIn"><a routerLink="/auth/login">Log In</a></button>
+
+      <div *ngIf="isLoggedIn && !isAdmin" tabindex="0" #cartView>
+        <button class="nav-item" (click)="toggleCart(); focusOnCart();">
+          <img
+            [src]="cartService.cart.products ? 'assets/images/cart_filled.jpg' : 'assets/images/cart_empty.jpg'"
+            alt="Cart Icon" class="w-8 h-8 mr-2"/>
+        </button>
+        <div *ngIf="showCart && cartService.cart.products" class="absolute top-20 right-5 mt-2 bg-white text-black p-2 shadow" (click)="$event.stopPropagation()">
+          <app-cart-list></app-cart-list>
+        </div>
+      </div>
+
+      <button class="nav-item" (click)="logOut()" *ngIf="isLoggedIn">Log out</button>
+    </div>
+
+  </nav>
+  <ng-content></ng-content>
+
+</div>

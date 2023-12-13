@@ -48,7 +48,6 @@ export class AddEditProductComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    console.log("destroyed")
     this.routerSubscription.unsubscribe();
   }
 

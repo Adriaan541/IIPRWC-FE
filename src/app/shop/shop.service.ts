@@ -10,8 +10,7 @@ import { Category } from "../models/category.model";
 export class ShopService {
 
   constructor(private authService: AuthService,
-              private http: HttpClient) {
-  }
+              private http: HttpClient) {}
 
   getProducts() {
     let apiUrl: string = "/api/products";
@@ -28,7 +27,7 @@ export class ShopService {
 
   getProductById(productId: String) {
     let apiUrl: string = `/api/products/${productId}`;
-    
+
     return this.http.get<Product>(apiUrl).pipe();
   }
 

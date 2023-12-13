@@ -10,7 +10,6 @@ import { RegisterComponent } from './account/register/register.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { AuthInterceptorService } from "./auth-interceptor.service";
 import { AccountComponent } from './account/account/account.component';
-import { AddEditCategoryComponent } from './admin/add-edit-category/add-edit-category.component';
 import { AddEditProductComponent } from './admin/add-edit-product/add-edit-product.component';
 import { CartItemComponent } from './cart/cart-item/cart-item.component';
 import { CartListComponent } from './cart/cart-list/cart-list.component';
@@ -31,7 +30,6 @@ import { AdminService } from "./admin/admin.service";
     NavbarComponent,
     RegisterComponent,
     AccountComponent,
-    AddEditCategoryComponent,
     AddEditProductComponent,
     CartItemComponent,
     CartListComponent,

@@ -1,0 +1,8 @@
+<section >
+  <app-order-item
+    class="p-10"
+    *ngFor="let order of orders"
+    (refreshOrders)="getOrders()"
+    [order]="order"></app-order-item>
+  <p *ngIf="orders.length < 1">No orders yet! <a routerLink="/shop">Start shopping</a></p>
+</section>

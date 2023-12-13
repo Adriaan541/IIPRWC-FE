@@ -18,7 +18,8 @@ export class NavbarComponent{
   constructor(private http: HttpClient,
               public cartService: CartService,
               private router: Router,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private elementRef: ElementRef) {
   }
 
   @HostListener('document:click', ['$event'])

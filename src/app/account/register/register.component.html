@@ -1,0 +1,133 @@
+<app-navbar>
+  <section>
+    <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8 border">
+      <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+        <img class="mx-auto h-10 w-auto" src="assets/images/webshop-logo.gif" alt="Your Company">
+        <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Register for an
+          account</h2>
+      </div>
+
+      <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+        <form [formGroup]="form" class="space-y-6">
+
+          <div>
+            <!--            <label for="firstName" class="block text-sm font-medium leading-6 text-gray-900">First name:</label>-->
+            <div class="mt-2">
+              <input type="text" name="firstName" autocomplete="firstName" formControlName="enteredFirstName" required
+                     placeholder="First name..." maxlength="64" minlength="2"
+                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+              <div
+                *ngIf="form.controls['enteredFirstName'].invalid && form.controls['enteredFirstName'].touched">
+                <p class="text-red-400" *ngIf="this.form.get('enteredFirstName')?.errors?.['required'] ||
+                this.form.get('enteredFirstName')?.errors?.['minlength']">
+                  Please enter first name*</p>
+                <p class="text-red-400" *ngIf="this.form.get('enteredFirstName')?.errors?.['maxlength']">
+                  First name cannot be over 64 characters*</p>
+
+              </div>
+
+            </div>
+          </div>
+
+          <div>
+            <div class="mt-2">
+              <input type="text" name="preposition" autocomplete="preposition" formControlName="enteredPreposition"
+                     placeholder="Preposition..."
+                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+            </div>
+          </div>
+
+          <div>
+            <div class="mt-2">
+              <input type="text" name="lastName" autocomplete="lastName" formControlName="enteredLastName" required
+                     placeholder="Last name..."
+                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+              <div *ngIf="form.controls['enteredLastName'].invalid && form.controls['enteredLastName'].touched">
+                <p class="text-red-400" *ngIf="
+              this.form.get('enteredLastName')?.errors?.['required'] ||
+              this.form.get('enteredLastName')?.errors?.['minlength']">Please enter last name*</p>
+                <p class="text-red-400" *ngIf="this.form.get('enteredLastName')?.errors?.['enteredLastName']">
+                  Last name cannot be over 64 characters*</p>
+              </div>
+
+            </div>
+          </div>
+
+          <div>
+            <div class="mt-2">
+              <input id="email" name="email" type="email" autocomplete="email" formControlName="enteredEmail" required
+                     placeholder="Email..."
+                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+              <p class="text-red-400"
+                 *ngIf="form.controls['enteredEmail'].invalid && form.controls['enteredEmail'].touched">Please enter a
+                valid email address*</p>
+            </div>
+          </div>
+          <div>
+
+            <div class="mt-2">
+              <div class="relative w-full">
+                <div class="absolute inset-y-0 right-0 flex items-center px-2">
+                  <input class="hidden js-password-toggle" id="toggle" type="checkbox"/>
+                  <label (click)="toggleShowPassword()"
+                         class="bg-gray-300 hover:bg-gray-400 rounded px-2 py-1 text-sm text-gray-600 font-mono cursor-pointer js-password-label"
+                         for="toggle">{{ hidePassword ? 'show' : 'hide' }}</label>
+                </div>
+                <input placeholder="Password..." formControlName="enteredPassword"
+                       class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                       type="{{hidePassword ? 'password' : 'text'}}" autocomplete="off"/>
+              </div>
+              <div
+                *ngIf="form.controls['enteredPassword'].invalid && form.controls['enteredPassword'].touched"
+                class="w-full mb-3">
+                <p class="text-red-400" *ngIf="
+              this.form.get('enteredPassword')?.errors?.['required'] ||
+              this.form.get('enteredPassword')?.errors?.['minlength']">
+                  Password must be at least 8 characters*</p>
+                <p class="text-red-400" *ngIf="this.form.get('enteredPassword')?.errors?.['maxlength']">Password cannot
+                  be over 64
+                  characters*</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-2">
+            <input id="repeatPassword" name="repeatPassword" type="password" formControlName="enteredRepeatPassword"
+                   required
+                   placeholder="Repeat password..."
+                   class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+            <div
+              *ngIf="(form.controls['enteredRepeatPassword'].invalid || form.value['enteredRepeatPassword'] !== form.value['enteredPassword']) && form.controls['enteredRepeatPassword'].touched"
+              class="w-full mb-3">
+              <p *ngIf="form.controls['enteredRepeatPassword'].invalid" class="text-red-400 text-sm mt-6 text-center tracking-tight">Field cannot be empty*</p>
+              <p *ngIf="form.value['enteredRepeatPassword'] !== form.value['enteredPassword']" class="text-red-400 text-sm mt-6 text-center tracking-tight">Passwords do not match*</p>
+            </div>
+          </div>
+
+          <div *ngIf="error !== null" class="mt-2 text-red-400">
+            <p>An error occured: {{ error }}</p>
+          </div>
+
+
+          <div>
+            <button type="submit" *ngIf="!isLoading" (click)="submitForm()" [disabled]="!form.valid || form.value['enteredRepeatPassword'] !== form.value['enteredPassword']"
+                    class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+              Register
+            </button>
+            <button
+              type="button" *ngIf="isLoading"
+              class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              disabled>
+              Loading...
+            </button>
+          </div>
+        </form>
+
+        <p class="mt-10 text-center text-sm text-gray-500">
+          Already got an account?
+          <a href="/login" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Login</a>
+        </p>
+      </div>
+    </div>
+  </section>
+</app-navbar>

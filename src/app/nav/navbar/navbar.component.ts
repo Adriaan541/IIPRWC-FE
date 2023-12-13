@@ -18,15 +18,13 @@ export class NavbarComponent{
   constructor(private http: HttpClient,
               public cartService: CartService,
               private router: Router,
-              private authService: AuthService,
-              private elementRef: ElementRef) {
+              private authService: AuthService) {
   }
 
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: Event): void {
     // Check if the click is outside the cart and close it
-    // @ts-ignore
-    if (!this.cartView.nativeElement.contains(event.target)) {
+    if (this.cartView && !this.cartView.nativeElement.contains(event.target)) {
       this.showCart = false;
     }
   }
@@ -35,7 +33,6 @@ export class NavbarComponent{
 
     if (this.cartView) {
       this.cartView.nativeElement.focus();
-      console.log("clicked")
     }
   }
 

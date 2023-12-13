@@ -1,0 +1,18 @@
+<app-navbar>
+  <section>
+    <div class="text-center p-10">
+      <h1 class="font-bold text-4xl text-purple-800 mb-4">Welcome!</h1>
+      <div>
+        <h1 class="text-3xl">Check out our limited stock: </h1>
+      </div>
+    </div>
+
+    <section id="Projects"
+             class="w-fit mx-auto grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mt-10 mb-5">
+      <app-product-item
+        *ngFor="let product of products"
+        (refreshProducts)="getProducts()"
+        [product]="product"></app-product-item>
+    </section>
+  </section>
+</app-navbar>

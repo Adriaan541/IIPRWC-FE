@@ -29,7 +29,7 @@
         <p class="pb-2 lg:inline-block">Quantity: </p>
         <p class="pb-2 lg:inline-block">Price: </p>
       </div>
-      <div *ngFor="let orderItem of order.orderProducts" routerLink="'/shop/'{{orderItem.product.id}}"
+      <div *ngFor="let orderItem of order.orderProducts" routerLink="/product/{{orderItem.product.id}}"
            class="font-bold p-5 grid grid-cols-1 lg:grid-cols-7 justify-center items-center border-gray-200 bg-purple-300">
         <img
           *ngIf="orderItem.product.pictureUrl"

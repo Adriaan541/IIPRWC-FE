@@ -195,7 +195,10 @@ export class AddEditProductComponent implements OnInit, OnDestroy {
   patchProduct(product: Product) {
     product.id = this.toEdit.id;
     this.adminService.patchProduct(product).subscribe({
-      next: (product) => {this.successMessage = `Product ${product.name} patched!`; this.router.navigateByUrl('/home')},
+      next: (product) => {
+        this.successMessage = `Product ${product.name} patched!`;
+        this.router.navigateByUrl('/shop')
+      },
       error: (e) => {this.error = e.message;}
     });
   }

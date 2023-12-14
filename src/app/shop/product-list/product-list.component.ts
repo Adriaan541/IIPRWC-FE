@@ -122,13 +122,19 @@ export class ProductListComponent implements OnInit {
 
   sortProducts() {
     let pString = this.selectedSortType;
-    if (this.sortDirection == "▲") {
-      // @ts-ignore
-      this.filteredProducts.sort((a, b) => this.getPropertyFromKeyString(b, pString).localeCompare(this.getPropertyFromKeyString(a, pString)));
+
+    if (this.getPropertyFromKeyString(this.filteredProducts[0], pString) * 0 === 0) {
+      if (this.sortDirection == "▲") {
+        this.filteredProducts.sort((a, b) => this.getPropertyFromKeyString(a, pString) - this.getPropertyFromKeyString(b, pString));
+      } else {
+        this.filteredProducts.sort((b, a) => this.getPropertyFromKeyString(a, pString) - this.getPropertyFromKeyString(b, pString));
+      }
     } else {
-      // @ts-ignore
-      this.filteredProducts.sort((a, b) => this.getPropertyFromKeyString(a, pString).localeCompare(this.getPropertyFromKeyString(b, pString)));
+      if (this.sortDirection == "▲") {
+        this.filteredProducts.sort((a, b) => this.getPropertyFromKeyString(b, pString).localeCompare(this.getPropertyFromKeyString(a, pString)));
+      } else {
+        this.filteredProducts.sort((a, b) => this.getPropertyFromKeyString(a, pString).localeCompare(this.getPropertyFromKeyString(b, pString)));
+      }
     }
   }
-
 }

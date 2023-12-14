@@ -67,7 +67,10 @@ export class AccountComponent implements OnInit{
 
   deleteAccountConfirmed() {
     this.accountService.deleteUser().subscribe({
-      next: user => {this.router.navigateByUrl('/home');},
+      next: user => {
+        this.authService.destroySession();
+        this.router.navigateByUrl('/home');
+        },
       error: e => {this.error = e;}
     })
   }

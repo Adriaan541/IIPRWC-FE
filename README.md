@@ -28,4 +28,4 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## Image showcase
 
-![Landing page](assets/app-showcase-images/Landing-page-screenshot.jpg)
+![Landing page](assets/app-showcase-images/Landing-page-screenshot.jpg](https://github.com/Adriaan541/IIPRWC-FE/blob/master/src/assets/app-showcase-images/Landing-page-screenshot.jpg)https://github.com/Adriaan541/IIPRWC-FE/blob/master/src/assets/app-showcase-images/Landing-page-screenshot.jpg)

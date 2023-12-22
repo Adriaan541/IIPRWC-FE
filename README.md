@@ -25,3 +25,26 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Image showcase
+
+Landing page screenshot
+![Landing page](https://github.com/Adriaan541/IIPRWC-FE/blob/master/src/assets/app-showcase-images/Landing-page-screenshot.jpg)
+
+Login page screenshot
+![Login page](https://github.com/Adriaan541/IIPRWC-FE/blob/master/src/assets/app-showcase-images/Login-page-screenshot.jpg)
+
+Register page screenshot with form warnings (Warnings only occur after user deselects form element)
+![Register page](https://github.com/Adriaan541/IIPRWC-FE/blob/master/src/assets/app-showcase-images/Register-page-after-blur-screenshot.jpg)
+
+Webshop page screenshot, logged in as customer
+![Webshop page](https://github.com/Adriaan541/IIPRWC-FE/blob/master/src/assets/app-showcase-images/Webshop-page-when-login-customer.jpg)
+
+My account page screenshot, also showcases webshop cart
+![My account page](https://github.com/Adriaan541/IIPRWC-FE/blob/master/src/assets/app-showcase-images/My-account-page-with-cart-open.jpg)
+
+Add/Edit product (Admin only)
+![Add edit product page](https://github.com/Adriaan541/IIPRWC-FE/blob/master/src/assets/app-showcase-images/add-edit-product-page-admin.jpg)
+
+Add/Edit Category after category edit (Admin only, showcase edits empty category, category with products can also be edited)
+![Add edit category page](https://github.com/Adriaan541/IIPRWC-FE/blob/master/src/assets/app-showcase-images/add-edit-category-page-admin.jpg)

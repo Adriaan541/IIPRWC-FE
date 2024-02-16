@@ -22,6 +22,7 @@ import { ProductPageComponent } from './shop/product-page/product-page.component
 import { CartService } from "./cart/cart.service";
 import { ShopService } from "./shop/shop.service";
 import { AdminService } from "./admin/admin.service";
+import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { AdminService } from "./admin/admin.service";
     OrderListComponent,
     ProductListComponent,
     ProductItemComponent,
-    ProductPageComponent
+    ProductPageComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
     BrowserModule,

@@ -6,7 +6,7 @@ import { ShopService } from "../../shop/shop.service";
 import { Product } from "../../models/product.model";
 import { AdminService } from "../admin.service";
 import { AuthService } from "../../auth.service";
-import { Subscription } from "rxjs";
+import { finalize, Subscription } from "rxjs";
 
 @Component({
   selector: 'app-add-edit-product',
@@ -22,6 +22,9 @@ export class AddEditProductComponent implements OnInit, OnDestroy {
   public error: string = '';
 
   public selectedCategory: Category = {} as Category;
+
+  public categoriesLoading: boolean = false;
+  public submitting: boolean = false;
 
   public categoryToDelete: Category = {} as Category;
   public warning: string = '';
@@ -97,7 +100,12 @@ export class AddEditProductComponent implements OnInit, OnDestroy {
 
 
   getCategories() {
-    this.shopService.getCategories().subscribe({
+    this.categoriesLoading = true;
+    this.shopService.getCategories().pipe(
+      finalize(() => {
+        this.categoriesLoading = false;
+      })
+    ).subscribe({
       next: (categories) => {
         this.categories = categories.sort((a, b) => a.name.localeCompare(b.name));
         this.setCategoryToEdit();
@@ -186,7 +194,12 @@ export class AddEditProductComponent implements OnInit, OnDestroy {
   }
 
   addProduct(product: Product) {
-    this.adminService.createProduct(product).subscribe({
+    this.submitting = true;
+    this.adminService.createProduct(product).pipe(
+      finalize(() => {
+        this.submitting = false;
+      })
+    ).subscribe({
       next: (product) => {this.successMessage = `Product with name ${product.name} created!`; this.init()},
       error: (e) => {this.error = e.message;}
     });
@@ -194,7 +207,12 @@ export class AddEditProductComponent implements OnInit, OnDestroy {
 
   patchProduct(product: Product) {
     product.id = this.toEdit.id;
-    this.adminService.patchProduct(product).subscribe({
+    this.submitting = true;
+    this.adminService.patchProduct(product).pipe(
+      finalize(() => {
+        this.submitting = false;
+      })
+    ).subscribe({
       next: (product) => {
         this.successMessage = `Product ${product.name} patched!`;
         this.router.navigateByUrl('/shop')
@@ -204,7 +222,12 @@ export class AddEditProductComponent implements OnInit, OnDestroy {
   }
 
   addCategory(category: Category) {
-    this.adminService.createCategory(category).subscribe({
+    this.submitting = true;
+    this.adminService.createCategory(category).pipe(
+      finalize(() => {
+        this.submitting = false;
+      })
+    ).subscribe({
       next: (category) => {
         this.successMessage = `Category with name ${category.name} created!`;
         this.getCategories();},
@@ -215,11 +238,16 @@ export class AddEditProductComponent implements OnInit, OnDestroy {
   patchCategory(category: Category) {
     category.id = this.toEdit.id;
     let oldName = this.toEdit.name;
+    this.submitting = true;
     if (this.toEdit.hasOwnProperty('products')) {
       // @ts-ignore
       category.products = this.toEdit.products;
     }
-    this.adminService.patchCategory(category).subscribe({
+    this.adminService.patchCategory(category).pipe(
+      finalize(() => {
+        this.submitting = false;
+      })
+    ).subscribe({
       next: (category) => {
         this.successMessage = `Category name changed from ${oldName} to ${category.name}!`;
         this.getCategories();},
@@ -238,7 +266,7 @@ export class AddEditProductComponent implements OnInit, OnDestroy {
 
   deleteCategoryConfirmed() {
     this.adminService.deleteCategory(this.categoryToDelete).subscribe({
-      next: cat => {this.getCategories()},
+      next: () => {this.getCategories()},
       error: e => {this.error = e;}
     });
 

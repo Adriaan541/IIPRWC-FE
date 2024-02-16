@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Order } from "../../models/order.model";
 import { OrderService } from "../order.service";
+import { finalize } from "rxjs";
 
 @Component({
   selector: 'app-order-list',
@@ -8,6 +9,7 @@ import { OrderService } from "../order.service";
 })
 export class OrderListComponent implements OnInit{
   public orders: Order[] =[];
+  public ordersLoading: boolean = false;
 
   constructor(private orderService: OrderService) {}
 
@@ -16,12 +18,17 @@ export class OrderListComponent implements OnInit{
   }
 
   getOrders() {
-    this.orderService.getOrders().subscribe({
+    this.ordersLoading = true;
+    this.orderService.getOrders().pipe(
+      finalize(() => {
+        this.ordersLoading = false;
+      })
+    ).subscribe({
       next: (orders) => {
         this.orders = orders;
         this.sortOrders();
         },
-      error: e => {}
+      error: () => {}
     })
   }
 

@@ -5,6 +5,7 @@ import { Router } from "@angular/router";
 import { AuthService } from "../../auth.service";
 import { Category } from "../../models/category.model";
 import { ShopService } from "../shop.service";
+import { finalize } from "rxjs";
 
 @Component({
   selector: 'app-product-list',
@@ -26,6 +27,9 @@ export class ProductListComponent implements OnInit {
   searchKeys: string[] = [
     "name", "shortDescription", "category.name"
   ]
+
+  public productsLoading: boolean = false;
+
   public filteredProducts: Product[] = [];
   public error: string = '';
 
@@ -42,7 +46,13 @@ export class ProductListComponent implements OnInit {
   }
 
   getProducts() {
-    this.shopService.getProducts().subscribe({
+    this.productsLoading = true;
+    this.filteredProducts = [];
+    this.shopService.getProducts().pipe(
+      finalize(() => {
+        this.productsLoading = false;
+      })
+    ).subscribe({
       next: (products) => {
         this.products = products;
         this.setFilteredProductsByCategory()

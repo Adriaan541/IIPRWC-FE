@@ -1,7 +1,11 @@
 {
   "/api/*": {
-    "target": "http://localhost:8080",
+    "target": "https://iprwc-be.ew.r.appspot.com",
+    "changeOrigin": true,
     "secure": false,
-    "logLevel": "debug"
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/exp": ""
+    }
   }
 }

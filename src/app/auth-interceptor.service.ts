@@ -8,11 +8,15 @@ import { Observable } from "rxjs";
   providedIn: 'root'
 })
 export class AuthInterceptorService implements HttpInterceptor {
-  constructor(private authService: AuthService, private router: Router) {
-  }
+  private proxyUrl = 'https://iprwc-be.ew.r.appspot.com';
+  constructor(private authService: AuthService, private router: Router) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const skipIntercept = request.headers.has("skip");
+
+    request = request.clone({
+      url: this.proxyUrl + request.url
+    })
 
     // Certain requests get the header: {skip: "true"} so the response can be viewed without requiring login
     if (skipIntercept) {

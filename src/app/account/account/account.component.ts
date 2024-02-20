@@ -4,6 +4,7 @@ import { User } from "../../models/user.model";
 import { AccountService } from "../account.service";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { Router } from "@angular/router";
+import { finalize } from "rxjs";
 
 @Component({
   selector: 'app-account',
@@ -15,6 +16,8 @@ export class AccountComponent implements OnInit{
   public myUserProfile: User = {} as User;
   public form: FormGroup;
 
+  public accountChangedMessage: string = '';
+  public accountLoading: boolean = false;
   public error: string = '';
   public warning: string = '';
 
@@ -35,7 +38,11 @@ export class AccountComponent implements OnInit{
   }
 
   getAccount() {
-    this.accountService.getUser().subscribe({
+    this.accountService.getUser().pipe(
+      finalize(() => {
+        this.accountLoading = false;
+      })
+    ).subscribe({
       next: (user) => {
         this.myUserProfile = user;
         this.form.patchValue(user);
@@ -45,9 +52,13 @@ export class AccountComponent implements OnInit{
   }
 
   submit() {
+    this.accountLoading = true;
     let val = this.form.value;
     this.accountService.updateUser(this.myUserProfile.id, val.email, val.firstName, val.preposition, val.lastName).subscribe({
-      next: user => { this.getAccount();},
+      next: () => {
+        this.getAccount();
+        this.accountChangedMessage = 'Account updated successfully!';
+        },
       error: e => {this.error = e.message;}
     })
   }
@@ -67,7 +78,7 @@ export class AccountComponent implements OnInit{
 
   deleteAccountConfirmed() {
     this.accountService.deleteUser().subscribe({
-      next: user => {
+      next: () => {
         this.authService.destroySession();
         this.router.navigateByUrl('/home');
         },
@@ -83,11 +94,19 @@ export class AccountComponent implements OnInit{
     }
   }
 
-  toggleInfo() {
+  toggleInfo(el: HTMLElement) {
+    el.scrollIntoView({behavior: 'smooth'});
     switch (this.openedTab) {
-      case '': this.openedTab = 'info'; break;
-      case 'orders': this.openedTab = 'info'; break;
-      case 'info': this.openedTab = ''; break;
+      case '':
+        this.openedTab = 'info';
+        break;
+      case 'orders':
+        this.openedTab = 'info';
+        break;
+      case 'info':
+        this.openedTab = '';
+        break;
     }
+
   }
 }

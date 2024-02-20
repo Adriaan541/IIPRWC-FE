@@ -7,19 +7,14 @@
     </div>
     <div
       class="w-fit mx-auto grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mt-10 mb-5">
-      <button type="button" (click)="toggleInfo()"
+      <button type="button" (click)="toggleInfo(loadingSpinner)"
               class="text-white bg-purple-700 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
         Show my info
       </button>
-      <button type="button" (click)="toggleOrders()" *ngIf="isAdmin"
+      <button type="button" (click)="toggleOrders()"
               class="text-white bg-purple-700 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
-        Show all orders
+        {{isAdmin ? 'Show all orders' : 'Show my orders'}}
       </button>
-      <button type="button" (click)="toggleOrders()" *ngIf="!isAdmin"
-              class="text-white bg-purple-700 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
-        Show my orders
-      </button>
-
       <button type="button" (click)="logOut()"
               class="text-white bg-purple-700 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
         Log out
@@ -46,17 +41,22 @@
       </div>
     </div>
 
-    <div *ngIf="openedTab !== ''" class="text-center">
+    <div #loadingSpinner>
+      <app-loading-spinner *ngIf="accountLoading"></app-loading-spinner>
+    </div>
+
+    <div *ngIf="openedTab !== '' && !accountLoading" class="text-center">
       <div *ngIf="openedTab === 'info'">
         <form [formGroup]="form" class="md:grid md:grid-cols-2 sm:grid-cols-1 content-center">
           <div class="mt-3">
             <h1>
-              Name: {{ myUserProfile.firstName }}
+              <b>Name:</b>
+              {{ myUserProfile.firstName }}
               {{ myUserProfile.preposition }}
               {{ myUserProfile.lastName }}
             </h1>
-            <h2>Member since: {{ myUserProfile.createDate | date: 'EEEE, MMMM d  yyyy' }}</h2>
-            <h2>Email: {{ myUserProfile.email }}</h2>
+            <h2><b>Member since:</b> {{ myUserProfile.createDate | date: 'EEEE, MMMM d  yyyy' }}</h2>
+            <h2><b>Email:</b> {{ myUserProfile.email }}</h2>
           </div>
 
           <div class="md:w-fit grid grid-cols-1 md:grid-cols-2 justify-items-center justify-center gap-y-5 gap-x-14 mt-3 mb-5">
@@ -73,8 +73,12 @@
             <label class="m-1 text-xl font-bold" for="lastName">Last Name:</label>
             <input class="border border-b border-b-blue-400 m-1 rounded-lg p-1" type="text" id="lastName" formControlName="lastName">
 
+            <div *ngIf="accountChangedMessage !== ''" class="mt-2 text-green-400">
+              <p>{{ accountChangedMessage }}</p>
+            </div>
+
             <button type="button" (click)="submit()"
-                    class="text-white bg-purple-700 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
+                    class="col-start-2 text-white bg-purple-700 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
               Submit changes
             </button>
           </div>

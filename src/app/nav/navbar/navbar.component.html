@@ -22,7 +22,7 @@
             [src]="cartService.cart.products ? 'assets/images/cart_filled.jpg' : 'assets/images/cart_empty.jpg'"
             alt="Cart Icon" class="w-8 h-8 mr-2"/>
         </button>
-        <div *ngIf="showCart && cartService.cart.products" class="absolute top-20 right-5 mt-2 bg-white text-black p-2 shadow" (click)="$event.stopPropagation()">
+        <div *ngIf="showCart && cartService.cart.products" class="absolute top-20 right-0 md:right-5 mt-2 bg-white text-black p-2 shadow w-screen sm:w-fit " (click)="$event.stopPropagation()">
           <app-cart-list></app-cart-list>
         </div>
       </div>

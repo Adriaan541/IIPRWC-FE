@@ -1,5 +1,5 @@
-<ul class="min-w-[400px] border border-blue-500 p-4 z-20">
-  <li class="flex grid grid-cols-4 gap-4 items-center">
+<ul class="sm:min-w-[400px] border border-blue-500 p-4 z-20">
+  <li class="hidden md:grid grid-cols-4 gap-4 items-center">
     <p>Image:</p>
     <p>Name:</p>
     <p>Quantity:</p>
@@ -8,11 +8,11 @@
     *ngFor="let cartItem of cartService.cart.products"
     [cartItem]="cartItem"></app-cart-item>
 
-  <li class="flex grid grid-cols-4 gap-4 items-center">
-    <p><b> Total: {{cartService.getTotalPrice() | currency: 'EUR'}}</b></p>
-    <button class="col-end-4 text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-900"
+  <li class="grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
+    <p class="m-auto"><b> Total: {{cartService.getTotalPrice() | currency: 'EUR'}}</b></p>
+    <button class="md:col-end-4 text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-900"
             (click)="checkOut()" >Checkout</button>
-    <button class="col-end-5 text-white bg-purple-700 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
+    <button class="md:col-end-5 text-white bg-purple-700 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
             (click)="emptyCart()">Empty cart</button>
   </li>
 </ul>

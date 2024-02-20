@@ -1,8 +1,8 @@
-<li class="flex grid grid-cols-4 gap-4 items-center">
+<li class="block grid grid-cols-2 md:grid-cols-4 gap-4 items-center border-b mb-0.5 text-center">
   <img
     [src]="cartItem.product.pictureUrl"
-    alt="Picture of {{cartItem.product.name}}" class="h-20 w-auto object-cover rounded-xl"/>
-  <h1 class="text-lg font-semibold text-black cursor-auto my-3">{{ cartItem.product.name }}</h1>
+    alt="Picture of {{cartItem.product.name}}" class="m-auto h-16 md:h-20 w-auto object-cover col-span-2 md:col-span-1 rounded-xl"/>
+  <h1 class="text-lg font-semibold text-black cursor-auto my-3 col-span-2 md:col-span-1">{{ cartItem.product.name }}</h1>
   <form [formGroup]="form" class="space-y-6">
     <input
       (change)="updateQuantity()"
@@ -11,7 +11,7 @@
       type="number"
       formControlName="quantity"
       required [max]="cartItem.product.stockQuantity" min="1"
-      class="w-12 text-center py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 rounded-full"
+      class="w-12 text-center py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 rounded-full mb-2"
     >
   </form>
   <button type="button" (click)="removeFromCart()"

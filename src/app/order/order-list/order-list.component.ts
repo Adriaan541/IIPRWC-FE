@@ -22,6 +22,7 @@ export class OrderListComponent implements OnInit{
     this.orderService.getOrders().pipe(
       finalize(() => {
         this.ordersLoading = false;
+        this.scrollToOrders();
       })
     ).subscribe({
       next: (orders) => {
@@ -36,5 +37,13 @@ export class OrderListComponent implements OnInit{
     this.orders.filter(item => item.orderDate !== undefined);
     // @ts-ignore
     this.orders.sort((a, b) => new Date(b.orderDate).getTime() - new Date(a.orderDate).getTime());
+  }
+
+  scrollToOrders() {
+    setTimeout(() => {
+      let scrollTo = document.getElementById("ordersDiv");
+      scrollTo!.scrollIntoView({behavior: "smooth", block: "end"})
+    }, 200);
+
   }
 }

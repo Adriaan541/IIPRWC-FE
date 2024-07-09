@@ -34,7 +34,7 @@ Landing page screenshot
 Login page screenshot
 ![Login page](https://github.com/Adriaan541/IIPRWC-FE/blob/master/src/assets/app-showcase-images/Login-page-screenshot.jpg)
 
-Register page screenshot with form warnings (Warnings only occur after user deselects form element)
+Register page screenshot with form warnings
 ![Register page](https://github.com/Adriaan541/IIPRWC-FE/blob/master/src/assets/app-showcase-images/Register-page-after-blur-screenshot.jpg)
 
 Webshop page screenshot, logged in as customer
